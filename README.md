@@ -41,6 +41,18 @@ npm test
 npm run build
 ```
 
+## Continuous integration
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` runs on pushes and
+pull requests targeting `main`, and can also be started manually. It installs
+dependencies with `npm ci`, checks formatting and TypeScript, runs the tests,
+builds the production bundle, and stores `dist/` as a seven-day workflow
+artifact.
+
+The workflow validates the project but does not deploy it. This keeps CI
+independent from the Vercel deployment configuration that can be connected
+later.
+
 ## Project structure
 
 ```text
@@ -58,6 +70,7 @@ npm run build
 │   ├── dom.ts                 DOM access helper
 │   └── styles.css             Responsive styling
 ├── tests/game-rules.test.ts   Core game-rule tests
+├── .github/workflows/ci.yml   GitHub Actions verification workflow
 ├── package.json               Scripts and development dependencies
 ├── package-lock.json          Locked dependency versions
 ├── vite.config.ts
