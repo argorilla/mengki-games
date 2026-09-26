@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#102d27" />
+    <meta
+      name="description"
+      content="Dua permainan ringan bersama Mengki: cari Mengki yang bersembunyi atau tangkap pisang."
+    />
+    <title>Mengki — Main bareng!</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%23102d27'/%3E%3Ccircle cx='15' cy='30' r='12' fill='%23b97741'/%3E%3Ccircle cx='49' cy='30' r='12' fill='%23b97741'/%3E%3Ccircle cx='32' cy='33' r='23' fill='%23b97741'/%3E%3Cellipse cx='32' cy='39' rx='15' ry='12' fill='%23f7d09b'/%3E%3Ccircle cx='24' cy='29' r='3' fill='%23102d27'/%3E%3Ccircle cx='40' cy='29' r='3' fill='%23102d27'/%3E%3Cpath d='M27 42q5 5 10 0' fill='none' stroke='%23102d27' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"
+            ><img src="assets/mengki-logo.png" alt="" /></span
+          ><span>Mengki</span>
+        </div>
+        <span class="top-note">Dua permainan kecil bersama Mengki</span>
+      </header>
+      <nav class="tabs" role="tablist" aria-label="Pilih permainan">
+        <button
+          id="tab-find"
+          class="tab"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-find"
+        >
+          🔎 Cari Mengki</button
+        ><button
+          id="tab-catch"
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-catch"
+        >
+          🍌 Tangkap Pisang
+        </button>
+      </nav>
+      <main>
+        <section
+          id="panel-find"
+          class="game"
+          role="tabpanel"
+          aria-labelledby="tab-find"
+        >
+          <div class="game-head">
+            <div>
+              <h1>Cari Mengki</h1>
+              <p>Temukan 10 Mengki di dalam hutan.</p>
+            </div>
+            <div class="score" aria-live="polite">
+              Ditemukan <strong id="found-count">0/10</strong>
+            </div>
+          </div>
+          <div
+            class="stage find-stage"
+            id="find-stage"
+            aria-label="Peta hutan yang dapat diperbesar dan digeser"
+          >
+            <div class="world" id="world"></div>
+            <div id="find-complete" class="completion" hidden>
+              <div class="modal">
+                <h2>Semua ketemu! 🐵</h2>
+                <p>Kamu berhasil menemukan 10 Mengki.</p>
+                <button class="primary" id="find-again">Cari lagi</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <span class="hint"
+              >Ketuk Mengki • Perbesar dan geser gambar untuk mencari yang
+              tersembunyi</span
+            >
+            <div class="actions">
+              <button
+                class="control-btn"
+                id="zoom-out"
+                aria-label="Perkecil gambar"
+              >
+                −</button
+              ><span id="zoom-label" aria-live="polite">100%</span
+              ><button
+                class="control-btn"
+                id="zoom-in"
+                aria-label="Perbesar gambar"
+              >
+                +</button
+              ><button class="control-btn" id="zoom-reset">Atur ulang</button>
+            </div>
+          </div>
+        </section>
+        <section
+          id="panel-catch"
+          class="game"
+          role="tabpanel"
+          aria-labelledby="tab-catch"
+          hidden
+        >
+          <div class="game-head">
+            <div>
+              <h1>Tangkap Pisang</h1>
+              <p>Gerakkan Mengki. Jangan lewatkan tiga pisang!</p>
+            </div>
+            <div class="score" aria-live="polite">
+              🍌 <strong id="catch-score">0</strong><span>·</span>❤️
+              <strong id="catch-lives">3</strong>
+            </div>
+          </div>
+          <div id="catch-stage" class="stage catch-stage">
+            <div class="catch-monkey" id="catch-monkey">
+              <img src="assets/mengki.gif" alt="Mengki" />
+            </div>
+            <div id="catch-start" class="catch-start">
+              <div class="modal">
+                <h2>Siap menangkap?</h2>
+                <p>
+                  Pakai tombol ← → atau A/D. Di ponsel, gunakan tombol di bawah.
+                </p>
+                <button class="primary" id="start-catch">Mulai main</button>
+              </div>
+            </div>
+            <div id="catch-over" class="completion" hidden>
+              <div class="modal">
+                <h2>Permainan selesai</h2>
+                <p>
+                  Kamu menangkap <strong id="final-score">0</strong> pisang.
+                </p>
+                <button class="primary" id="catch-again">Main lagi</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls catch-controls">
+            <div class="actions">
+              <button
+                class="move-btn"
+                id="move-left"
+                aria-label="Gerakkan Mengki ke kiri"
+              >
+                ←</button
+              ><button
+                class="move-btn"
+                id="move-right"
+                aria-label="Gerakkan Mengki ke kanan"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
